@@ -1,5 +1,6 @@
 # coding=utf-8
 import numpy as np
+#import sphviewer as sph
 from matplotlib.mlab import griddata
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -89,17 +90,56 @@ class Plot(object):
             plt.show()
 
     def surf(self, save_fig_path=None, *args, **kwargs):
+        # type: (boolean, object, object) -> Plot()
         ax = plt.gca(projection='3d')
         x, y = np.meshgrid(self.x, self.y)
         surf = ax.plot_surface(x, y, self.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0.1, antialiased=False)
         z_min = np.min(self.z)
         z_max = np.max(self.z)
         ax.set_zlim(z_min, z_max)
+        if kwargs['title']:
+            plt.title(kwargs['title'])
         # ax.zaxis.set_major_locator(LinearLocator(10))
         # ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
 
         plt.colorbar(surf, shrink=0.5, aspect=5, extendfrac=True)
 
+        if save_fig_path:
+            plt.savefig(save_fig_path, bbox_inches='tight')
+            plt.close(self.fig)
+        else:
+            plt.show()
+
+    def mesh(self, save_fig_path=None, *args, **kwargs):
+        # type: (boolean, object, object) -> Plot()
+
+        ax = plt.gca(projection='3d')
+        x, y = np.meshgrid(self.x, self.y)
+        #surf = ax.plot_wireframe(x, y, self.z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0.1, antialiased=False)
+        mesh = ax.plot_wireframe(x, y, self.z)
+        z_min = np.min(self.z)
+        z_max = np.max(self.z)
+        ax.set_zlim(z_min, z_max)
+        if kwargs['title']:
+            plt.title(kwargs['title'])
+        # ax.zaxis.set_major_locator(LinearLocator(10))
+        # ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+        #plt.colorbar(mesh, shrink=0.5, aspect=5, extendfrac=True)
+
+        if save_fig_path:
+            plt.savefig(save_fig_path, bbox_inches='tight')
+            plt.close(self.fig)
+        else:
+            plt.show()
+
+    def error_map(self, save_fig_path=None, *args, **kwargs):
+        # type: (boolean, object, object) -> Plot()
+        x, y = np.meshgrid(self.x, self.y)
+        plt.imshow(self.z, cmap=cm.coolwarm, interpolation='gaussian')
+        plt.colorbar()
+        if kwargs['title']:
+            plt.title(kwargs['title'])
         if save_fig_path:
             plt.savefig(save_fig_path, bbox_inches='tight')
             plt.close(self.fig)

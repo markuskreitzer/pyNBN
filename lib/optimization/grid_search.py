@@ -37,10 +37,10 @@ class GridSearch(object):
         self.x_test = preprocessing.scale(x_test)
 
         # This will store the best prediction the SVR can come up with that
-        # corresponds with the MSE above.
+        # corresponds with the mse above.
         self.winner = {}
 
-        # This is an arbitrary high number just to start updating this variable with the lowest MSE.
+        # This is an arbitrary high number just to start updating this variable with the lowest mse.
         self.best_mse = float("inf")
 
         self.prediction = np.zeros(self.y_test.shape)
@@ -49,8 +49,8 @@ class GridSearch(object):
     def svr_grid_search(self, param_grid, make_plots=False, winner_plot=False):
         # TODO: Generalize to pass in any arbitrary learning object, e.g. my Neuron-By-Neuron object to search.
         """
-        Iterates over a grid of parameters. Scoring is based on Mean-Squared Error (MSE).
-        Returns the parameters with the lowest MSE.
+        Iterates over a grid of parameters. Scoring is based on Mean-Squared Error (mse).
+        Returns the parameters with the lowest mse.
 
         Parameter Explanation:
         =====================
@@ -63,7 +63,7 @@ class GridSearch(object):
             high -> accurate surface (slow computationally)
 
         """
-        # Update variable that determines whether we generate a plot for the lowest MSE values.
+        # Update variable that determines whether we generate a plot for the lowest mse values.
         if winner_plot:
             self.winner_plot = winner_plot
 
@@ -91,7 +91,7 @@ class GridSearch(object):
             train_mse = mean_squared_error(self.y_train, train_prediction)
             test_mse = mean_squared_error(self.y_test, self.prediction)
 
-            # Record Best MSE and update with a better
+            # Record Best mse and update with a better
             if test_mse < self.best_mse:
                 self.best_mse = test_mse
                 self.best_prediction = self.prediction
@@ -111,7 +111,7 @@ class GridSearch(object):
                 else:
                     gamma_str = my_gamma
 
-                my_title = 'Surface with gamma=%s C=%0.3f and MSE=%0.5f (train MSE=%0.5f)' % (
+                my_title = 'Surface with gamma=%s C=%0.3f and mse=%0.5f (train mse=%0.5f)' % (
                     gamma_str, my_c, test_mse, train_mse)
                 my_filename = '%s_%d' % (self.plot_filename_prefix, cnt)
                 Plot(self.x_test[:, 0], self.x_test[:, 1], self.prediction).surf_rand(title=my_title,
@@ -126,7 +126,7 @@ class GridSearch(object):
             else:
                 gamma_str = my_gamma
 
-            my_title = 'Surface with gamma=%s C=%0.3f and Test MSE=%0.5f (Train MSE=%0.5f)' % (
+            my_title = 'Surface with gamma=%s C=%0.3f and Test mse=%0.5f (Train mse=%0.5f)' % (
                 gamma_str, my_c, self.winner['test_mse'], self.winner['train_mse'])
             my_filename = '%s_winner.png' % self.plot_filename_prefix
             Plot(self.x_test[:, 0], self.x_test[:, 1], self.best_prediction).surf_rand(title=my_title,

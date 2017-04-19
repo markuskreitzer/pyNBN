@@ -91,7 +91,7 @@ class NBN(object):
                                                 self.activation, self.gain, self.training_parameters, initial_weights)
             self.test_time = time.time() - tic
 
-            # Calculate RMSE for training test
+            # Calculate target_rmse for training test
             self.RMSEt_rc[tr] = np.sqrt(SSE_testing / self.test_number_of_patterns)
             if self.RMSE[-1] < self.threshold:
                 self.IS += 1

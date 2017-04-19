@@ -11,12 +11,12 @@ import numpy as np
 
 # Custom Libraries
 from lib.plotting.plot import Plot
-import synthesize_data as synth_data
+import lib.synthesis.synthesize_data as synth_data
 
 ###########################################################################
 # Step 1: Download and install LIBSVM. Note: This is my own wrapper for the official LIBSVM library. The library is a
 #  bit more abstracted than the example Matlab code that was given for this class project.
-from grid_search import GridSearch
+from lib.optimization.grid_search import GridSearch
 
 ###########################################################################
 # Step 2: Generate 30*30 points to verify and plot resulting data. I generated the following data by randomly
