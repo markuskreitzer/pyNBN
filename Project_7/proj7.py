@@ -9,7 +9,7 @@ import pandas as pd
 from lib.synthesis import synthesize_data
 from lib.util import add_column
 
-train_points = 2000
+train_points = 80000
 test_points = 1000
 grid_dim = 30
 
@@ -18,7 +18,7 @@ train_data = pd.DataFrame(synthesize_data.gen(train_points), columns=['x', 'y', 
 test_data = pd.DataFrame(synthesize_data.gen(test_points), columns=['x', 'y', 'z'])
 
 # Export the data as CSV.
-train_data.to_csv("ErrCor_ribbonDemo/train_2000.csv", index=False)
+train_data.to_csv("ErrCor_ribbonDemo/train_80000.csv", index=False)
 test_data.to_csv("ErrCor_ribbonDemo/test_1000.csv", index=False)
 
 
