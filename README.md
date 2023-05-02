@@ -1,4 +1,4 @@
 # pyNBN
 An implementation of the Neuron By Neuron training algorithm (developed by B. Wilamowski), written in Python.
 
-Hoping to eventually submit to be merged with scikit sklearn.
+Hoping to eventually submit to be merged with scikit sklearn or pytorch as a nonlinear optimizer.
